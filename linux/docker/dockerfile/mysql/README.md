@@ -30,7 +30,7 @@ mysql> select host, user, password from mysql.user;
 +--------------+-------+-------------------------------------------+
 7 rows in set (0.00 sec)
 ```
-拥有远程访问权限的 admin 用户的密码，可以使用 `docker logs + id` 来获取。
+拥有远程访问权限的 admin 用户的密码，可以使用 `docker logs + id/name` 来获取。
 ```sh
 $ sudo docker logs test-mysql 
 => An empty or uninitialized MySQL volume is detected in /var/lib/mysql
@@ -58,35 +58,6 @@ MySQL user 'root' has no password but only allows local connections
 ```sh
 $ sudo docker run -d -P -e MYSQL_PASS="mypass" mysql
 1b32444ebb7232f885961faa15fb1a052ca93b81c308cc41d16bd3d276c77d75
-```
-####将宿主主机的文件夹挂载到容器的数据库文件夹
-默认情况数据库的数据库文件和日志文件都会存在容器的 AUFS 层，这不仅使得容器变得越来越臃肿，不便于迁移、备份等管理，而且数据库的 IOPS 也会受到影响。
-```sh
-$ docker run -d -P -v /opt/mysqldb:/var/lib/mysql mysql
-```
-这样，容器就会将数据文件和日志文件都放到你指定的 主机目录下面。
-```sh
-$ tree /opt/mysqldb/
-/opt/mysqldb/
-|-- auto.cnf
-|-- ib_logfile0
-|-- ib_logfile1
-|-- ibdata1
-|-- mysql
-|   |-- columns_priv.MYD
-|   |-- columns_priv.MYI
-|   |-- columns_priv.frm
-|   |-- db.MYD
-|   |-- db.MYI
-|   |-- db.frm
-|   |-- event.MYD
-|   |-- event.MYI
-|   |-- event.frm
-|   |-- func.MYD
-|   |-- func.MYI
-|   |-- func.frm
-|   |-- general_log.CSM
-...
 ```
 ####使用主从复制模式
 创建一个叫 mysql 的容器。
