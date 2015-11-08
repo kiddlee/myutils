@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 MAINTAINER lishulei
 RUN apt-get update \
-	apt-get upgrade -y
+	&& apt-get upgrade -y
 RUN echo "Asia/Shanghai" > /etc/timezone && \
                 dpkg-reconfigure -f noninteractive tzdata
 RUN apt-get install -y openssh-server
