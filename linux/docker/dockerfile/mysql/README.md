@@ -1,10 +1,11 @@
 ###Mysql
 ###Create folder
+```
 mkdir -p /data/var/log/mysql
 mkdir -p /data/mysql/var/lib/mysql 
-
+```
 ###Create container
-```sh
+```
 docker run \
 --name test-mysql \
 -it -d \
@@ -12,10 +13,10 @@ docker run \
 -v /data/var/log/mysql/:/var/log/mysql \
 -p 7306:3306 \
 mysql
-```sh
+```
 
 ###Mysql 的 root 用户默认没有密码只能本地访问。
-```sh
+```
 mysql> select host, user, password from mysql.user;
 +--------------+-------+-------------------------------------------+
 | host         | user  | password                                  |
@@ -31,7 +32,7 @@ mysql> select host, user, password from mysql.user;
 7 rows in set (0.00 sec)
 ```
 拥有远程访问权限的 admin 用户的密码，可以使用 `docker logs + id/name` 来获取。
-```sh
+```
 $ sudo docker logs test-mysql 
 => An empty or uninitialized MySQL volume is detected in /var/lib/mysql
 => Installing MySQL ...
@@ -55,21 +56,21 @@ MySQL user 'root' has no password but only allows local connections
 上面的 `t1FWuDCgQicT` 就是 admin 的密码。
 
 ####给 admin 用户指定用户名和密码
-```sh
+```
 $ sudo docker run -d -P -e MYSQL_PASS="mypass" mysql
 1b32444ebb7232f885961faa15fb1a052ca93b81c308cc41d16bd3d276c77d75
 ```
 ####使用主从复制模式
 创建一个叫 mysql 的容器。
-```sh
+```
 $ docker run -d -e REPLICATION_MASTER=true  -P  --name mysql  mysql
 ```
 创建从 mysql 容器，并连接到刚刚创建的主容器。
-```sh
+```
 $ docker run -d -e REPLICATION_SLAVE=true -P  --link mysql:mysql  mysql
 ```
 注意：这里的主 mysql 服务器的名字必须叫 mysql，否则会提示 `Cannot configure slave, please link it to another MySQL container with alias as 'mysql'！
-```sh
+```
 # docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS                                            NAMES
 a781d1c74024        mysql:latest        "/run.sh"           About a minute ago   Up About a minute   0.0.0.0:49167->22/tcp, 0.0.0.0:49168->3306/tcp   romantic_fermi
