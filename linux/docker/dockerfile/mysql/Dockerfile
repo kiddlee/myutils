@@ -29,7 +29,7 @@ ENV REPLICATION_USER replica
 ENV REPLICATION_PASS replica
 
 # Add Volume 
-VOLUME  ["/etc/mysql", "/var/lib/mysql"]
+VOLUME  ["/etc/mysql", "/var/lib/mysql", "/var/log/mysql"]
 
 # Add Port
 EXPOSE 3306

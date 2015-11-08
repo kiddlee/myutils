@@ -9,6 +9,10 @@ LOG="/var/log/mysql/error.log"
 # Set permission of config file
 chmod 644 ${CONF_FILE}
 chmod 644 /etc/mysql/conf.d/mysqld_charset.cnf
+chown -R mysql:mysql /var/run/mysqld
+chown -R mysql:mysql /var/lib/mysql
+chmod 0700 /var/lib/mysql
+chmod 2750 /var/log/mysql
 
 StartMySQL ()
 {
