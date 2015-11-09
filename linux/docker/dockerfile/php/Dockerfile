@@ -19,6 +19,11 @@ listen = 0.0.0.0:9000' /etc/php5/fpm/pool.d/www.conf
 
 RUN sed -i 's/^listen.allowed_clients/;listen.allowed_clients/' /etc/php5/fpm/pool.d/www.conf
 
-EXPOSE 9000
+RUN mkdir -p /data/web && \
+    chown -R www-data:www-data /data/web
+
 VOLUME ["/data/web"]
+
+EXPOSE 9000
+
 ENTRYPOINT ["php5-fpm"]
