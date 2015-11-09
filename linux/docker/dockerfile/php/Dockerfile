@@ -1,38 +1,24 @@
-FROM debian:jessie
+FROM ubuntu
 MAINTAINER lishulei <shulei.lee@gmail.com>
 
-# Install PHP5 AND popular required extensions
-RUN apt-get -y update \
-	apt-get upgrade -y \
-	&& DEBIAN_FRONTEND=noninteractive apt-get -y install php5-cli \
-	php5-fpm \
-    	php5-json \
-    	php5-curl \    
-    	php5-mcrypt \
-        php5-json \    
-        php5-memcached \
-        php5-mcrypt \
-        php5-mysql \
-        php5-redis \
+ENV DEBIAN_FRONTEND noninteractive
 
-        #php5-geoip \
-        #php5-sqlite \
-        #php5-pgsql \
-        #php5-mssql \
-        #php5-mongo \
-        #php5-imagick \
-        #php5-imap \
-        #php5-ldap \
-    	#php5-gd \
-    	#php5-readline \
-        #php5-memcache \
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get -y dist-upgrade
 
-	# Remove temp files
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get -y install php5 php5-fpm php5-gd php5-ldap \
+    php5-sqlite php5-pgsql php-pear php5-mysql \
+    php5-mcrypt php5-xcache php5-xmlrpc
 
-# Enable modules
-# RUN php5enmod readline mcrypt mongo mssql pgsql sqlite3 redis
+RUN sed -i '/daemonize /c \
+daemonize = no' /etc/php5/fpm/php-fpm.conf
 
-# Default command
-CMD ["/usr/bin/php"]
+RUN sed -i '/^listen /c \
+listen = 0.0.0.0:9000' /etc/php5/fpm/pool.d/www.conf
+
+RUN sed -i 's/^listen.allowed_clients/;listen.allowed_clients/' /etc/php5/fpm/pool.d/www.conf
+
+EXPOSE 9000
+VOLUME ["/data/web"]
+ENTRYPOINT ["php5-fpm"]
