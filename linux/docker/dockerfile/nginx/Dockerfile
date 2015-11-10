@@ -1,6 +1,6 @@
 FROM ubuntu
 MAINTAINER lishulei
-RUN echo “deb http://archive.ubuntu.com/ubuntu precise main universe” > /etc/apt/so urce.list
+RUN echo “deb http://archive.ubuntu.com/ubuntu precise main universe” > /etc/apt/source.list
 RUN apt-get update \
     && apt-get upgrade -y
 
