@@ -1,4 +1,4 @@
-FROM sshd
+FROM ubuntu
 MAINTAINER lishulei <shulei.lee@gmail.com>
 # Install software 
 ENV DEBIAN_FRONTEND noninteractive

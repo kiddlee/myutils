@@ -17,12 +17,14 @@ daemonize = no' /etc/php5/fpm/php-fpm.conf
 RUN sed -i '/^listen /c \
 listen = 0.0.0.0:9000' /etc/php5/fpm/pool.d/www.conf
 
+RUN echo 'error_log = /var/log/php5-fpm.log' >> /etc/php5/fpm/php.ini
+
 RUN sed -i 's/^listen.allowed_clients/;listen.allowed_clients/' /etc/php5/fpm/pool.d/www.conf
 
 RUN mkdir -p /data/web && \
     chown -R www-data:www-data /data/web
 
-VOLUME ["/data/web"]
+VOLUME ["/data/web", "/var/log"]
 
 EXPOSE 9000
 
