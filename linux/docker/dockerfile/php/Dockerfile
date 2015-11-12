@@ -1,11 +1,8 @@
 FROM ubuntu
 MAINTAINER lishulei <shulei.lee@gmail.com>
 
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get -y dist-upgrade
+RUN apt-get update && \
+    apt-get -y upgrade
 
 RUN apt-get -y install php5-cli php5-fpm php5-mysql 
 
