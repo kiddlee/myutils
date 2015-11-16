@@ -21,6 +21,8 @@ RUN sed -i 's/^listen.allowed_clients/;listen.allowed_clients/' /etc/php5/fpm/po
 RUN mkdir -p /data/web && \
     chown -R www-data:www-data /data/web
 
+ADD composer /usr/local/bin/
+
 VOLUME ["/data/web", "/var/log/php"]
 
 EXPOSE 9000
