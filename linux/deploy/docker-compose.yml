@@ -1,0 +1,29 @@
+nginx:
+  container_name: test-nginx
+  dns: 172.17.0.1
+  expose: 
+    - "80"
+    - "433"
+  image: nginx
+  ports:
+    -  "8080:80"
+    -  "8433:433"
+  volumes:
+    - /data/nginx/conf/sites-enabled:/etc/nginx/sites-enabled
+    - /data/nginx/conf/certs:/etc/nginx/certs
+    - /data/nginx/conf/conf.d:/etc/nginx/conf.d
+    - /data/var/log/nginx:/var/log/nginx
+    - /data/web:/data/web
+  restart: always
+php:
+  container_name: test-php
+  dns: 172.17.0.1
+  expose:
+    - "9000"
+  image: php
+  ports: 
+    - "9000:9000"
+  volumes:
+    - /data/web:/data/web
+    - /data/var/log/php5:/var/log/php5
+  restart: always
