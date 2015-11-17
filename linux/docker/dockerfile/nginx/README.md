@@ -24,5 +24,7 @@ docker run --name test-nginx -it -d  \
 -v /data/web:/data/web \
 -p 8080:80 \
 -p 8443:443 \
+--dns 172.17.0.1 \
+--restart always \
 nginx
 ```
