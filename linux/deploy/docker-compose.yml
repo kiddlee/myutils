@@ -1,5 +1,5 @@
 nginx:
-  container_name: test-nginx
+  container_name: nginx
   dns: 172.17.0.1
   expose: 
     - "80"
@@ -9,14 +9,14 @@ nginx:
     -  "8080:80"
     -  "8433:433"
   volumes:
-    - /data/nginx/conf/sites-enabled:/etc/nginx/sites-enabled
-    - /data/nginx/conf/certs:/etc/nginx/certs
-    - /data/nginx/conf/conf.d:/etc/nginx/conf.d
-    - /data/var/log/nginx:/var/log/nginx
-    - /data/web:/data/web
+    - ${DEV_PATH}/etc/nginx/conf/sites-enabled:/etc/nginx/sites-enabled
+    - ${DEV_PATH}/etc/nginx/conf/certs:/etc/nginx/certs
+    - ${DEV_PATH}/etc/nginx/conf/conf.d:/etc/nginx/conf.d
+    - ${DEV_PATH}/var/log/nginx:/var/log/nginx
+    - ${DEV_PATH}/web:/data/web
   restart: always
 php:
-  container_name: test-php
+  container_name: php
   dns: 172.17.0.1
   expose:
     - "9000"
@@ -24,6 +24,18 @@ php:
   ports: 
     - "9000:9000"
   volumes:
-    - /data/web:/data/web
-    - /data/var/log/php5:/var/log/php5
+    - ${DEV_PATH}/web:/data/web
+    - ${DEV_PATH}/var/log/php5:/var/log/php5
+  restart: always
+mysql:
+  container_name: mysql 
+  dns: 172.17.0.1
+  expose:
+    - "3306"
+  image: php
+  ports: 
+    - "3306:3306"
+  volumes:
+    - ${DEV_PATH}/var/log/mysql
+    - ${DEV_PATH}/mysql/var/lib/mysql
   restart: always
