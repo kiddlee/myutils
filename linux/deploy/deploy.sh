@@ -2,6 +2,23 @@
 
 workdir=$(dirname `pwd`)
 
+check_evn() {
+    if [ $DEV_PATH ]
+    then
+        if [ -d $DEV_PATH ]
+	fi
+    else
+        echo "need set DEV_PATH"
+    fi
+    if [ $DATA_PATH ]
+    then
+        if [ -d $DATA_PATH ]
+	fi
+    else
+        echo "need set DATA_PATH"
+    fi
+}
+
 usage() {
     echo " ======================================================================="
     echo "|                                                                       |"
@@ -12,7 +29,6 @@ usage() {
 }
 
 work() {
-
     file="$1.sh"
     p=$(pwd)
 

@@ -37,5 +37,5 @@ mysql:
     - "3306:3306"
   volumes:
     - ${DEV_PATH}/var/log/mysql
-    - ${DEV_PATH}/mysql/var/lib/mysql
+    - ${DATA_PATH}/mysql/var/lib/mysql
   restart: always
