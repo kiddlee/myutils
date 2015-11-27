@@ -1,0 +1,13 @@
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "mydev"
+  config.vm.box_url = "file:///Users/lishulei/vagrant/dev/dev.box"
+  config.vm.network "private_network", ip: "10.10.10.11"
+  config.vm.network "forwarded_port", guest: 3306, host: 3306
+  config.vm.network "public_network"
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+  end
+end
