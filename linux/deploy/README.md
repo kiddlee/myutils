@@ -14,7 +14,7 @@ chmod +x /usr/local/bin/update-docker-dnsmasq
 #!/bin/bash
 
 : ${DOCKERDNS_FILE:="/etc/dnsmasq.d/docker"}
-: ${DOCKERDNS_SUFFIX:=".docker.local"}
+: ${DOCKERDNS_SUFFIX:=".docker"}
 
 echo -n '' > $DOCKERDNS_FILE || exit
 
