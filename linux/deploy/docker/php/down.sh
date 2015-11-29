@@ -1,2 +1,2 @@
 #!/bin/bash
-docker rm -f test-php
+docker rm -f php

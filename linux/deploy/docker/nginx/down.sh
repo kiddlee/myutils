@@ -1,2 +1,2 @@
 #!/bin/bash
-docker rm -f test-nginx
+docker rm -f nginx

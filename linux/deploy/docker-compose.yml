@@ -32,10 +32,10 @@ mysql:
   dns: 172.17.0.1
   expose:
     - "3306"
-  image: php
+  image: mysql
   ports: 
     - "3306:3306"
   volumes:
-    - ${DEV_PATH}/var/log/mysql
-    - ${DATA_PATH}/mysql/var/lib/mysql
+    - ${DEV_PATH}/var/log/mysql:/var/log/mysql
+    - ${DATA_PATH}/mysql:/var/lib/mysql
   restart: always
