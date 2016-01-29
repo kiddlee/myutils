@@ -1,0 +1,28 @@
+blog_php:
+  container_name: blog_php
+  expose:
+    - "9000"
+  image: php
+  ports: 
+    - "9000:9000"
+  volumes:
+    - ${DEV_PATH}/web/blog:/data/web
+    - ${DEV_PATH}/var/log/php5:/var/log/php5
+  restart: always
+blog_nginx:
+  container_name: blog_nginx
+  expose: 
+    - "80"
+    - "433"
+  image: nginx
+  ports:
+    -  "7000:80"
+  volumes:
+    - ${DEV_PATH}/web/blog:/data/web
+    - ${DEV_PATH}/etc/blog/nginx/conf/sites-enabled:/etc/nginx/sites-enabled
+    - ${DEV_PATH}/etc/blog/nginx/conf/certs:/etc/nginx/certs
+    - ${DEV_PATH}/etc/blog/nginx/conf/conf.d:/etc/nginx/conf.d
+    - ${DEV_PATH}/var/log/nginx:/var/log/nginx
+  links:
+    - blog_php:blog_php
+  restart: always
