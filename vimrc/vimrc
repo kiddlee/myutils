@@ -11,6 +11,11 @@ set mouse=a 		" 鼠标可用
 set syntax=on 		" 语法高亮
 set t_Co=256 		" 颜色
 set background=dark " 背景颜色
+set ic              " 忽略大小写
+
+if has("syntax")
+  syntax on
+endif
 
 " tab 快捷键 start
 " 新tab
@@ -53,6 +58,9 @@ Plugin 'molokai' 		" molokai 插件
 Plugin 'bling/vim-airline' 	" airline 插件
 Plugin 'scrooloose/nerdtree' " nerdtree
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'HTML-AutoCloseTag'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -73,3 +81,19 @@ map <C-d> :NERDTreeToggle<CR>
 let mapleader = ","
 let maplocalleader = ","
 " nerdcommenter end
+
+" 关闭NERDTree快捷键
+map <leader>t :NERDTreeToggle<CR>
+" 显示行号
+let NERDTreeShowLineNumbers=1
+let NERDTreeAutoCenter=1
+" 是否显示隐藏文件
+let NERDTreeShowHidden=1
+" 设置宽度
+let NERDTreeWinSize=31
+" 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
+" 忽略一下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+" 显示书签列表
+let NERDTreeShowBookmarks=1
