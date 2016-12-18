@@ -17,7 +17,7 @@ $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ### 2. 使用该配置, 并 `git clone` 下该项目:
 
 ```
-$ git clone https://github.com/stenote/vimrc /tmp/vimrc/
+$ git clone https://github.com/kiddlee/myutils/blob/master/vimrc/vimrc /tmp/vimrc/
 ```
 
 ### 3. 复制 .vimrc 到 `$HOME`
