@@ -17,13 +17,13 @@ $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ### 2. 使用该配置, 并 `git clone` 下该项目:
 
 ```
-$ git clone https://github.com/kiddlee/myutils/blob/master/vimrc/vimrc /tmp/vimrc/
+$ git clone https://github.com/kiddlee/myutils /tmp/myutils/
 ```
 
 ### 3. 复制 .vimrc 到 `$HOME`
 
 ```
-$ cp /tmp/vimrc/vimrc $HOME/.vimrc
+$ cp /tmp/myutils/vimrc/vimrc $HOME/.vimrc
 ```
 
 ### 4. 安装对应插件
